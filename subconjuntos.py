@@ -19,6 +19,6 @@ def check(i,t,entrada):
 
 
 lista = []
-for i in range(1,300):
+for i in range(1,3000):
     lista.append(i)
     suma_subconjuntos(lista)

@@ -1,3 +1,8 @@
+from time import time
+llamadas = {}
+verbose = 0
+
+@profile
 
 lista = []
 sol_actual = []
@@ -5,9 +10,6 @@ sol_suma = 0
 N = 0
 subconjuntos_totales = 0
 subconjuntos_correctos = 0
-verbose = 0
-
-llamadas = {}
 
 
 
@@ -58,12 +60,15 @@ def check(i,t):
             sol_suma -= lista[j]
 
 
-for i in range(2,12):
+for i in range(2,10):
     lista=range(i*-1,i+1)
     mensaje("Comenzando problema: ")
     N = len(lista)
+    tiempo_inicial = time()
     suma_subconjuntos()
-    print(N, subconjuntos_totales, subconjuntos_correctos, len(llamadas), lista)
+    tiempo_final = time()
+    tiempo = tiempo_final - tiempo_inicial
+    print("%d;%d;%d;%f;%d" % (N, subconjuntos_totales, subconjuntos_correctos, tiempo, len(llamadas)))
     mensaje("Analizados %d subconjuntos (%d buenos) con tamanio de entrada %d" % (subconjuntos_totales, subconjuntos_correctos, N))
 
 

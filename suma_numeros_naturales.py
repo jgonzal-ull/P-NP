@@ -2,14 +2,15 @@
 import numpy as np
 from time import time
 
-verbose = 2
+verbose = 0
 N = 4
-Nnum = 20
+Nnum = 100
 
-solucion = np.zeros((1, N + 1))
+solucion = np.zeros((1, Nnum + 1))
 numeros = np.zeros((1,Nnum))
-indices = np.zeros((1,10))
+indices = np.zeros((1,Nnum))
 
+secuencia=[]
 
 for i in range(0,Nnum):
     numeros[0][i] = i
@@ -22,29 +23,34 @@ def mensaje(cadena, nivel):
         print(cadena)
 
 def set_solucion(posicion, valor):
-    global solucion
+    global solucion, secuencia
     solucion[0][posicion] = valor
     mensaje("SS%d:%f" % (posicion, valor),2)
+    secuencia.append("SS%d:%f" % (posicion, valor))
 def set_indice(posicion, valor):
-    global indices
+    global indices, secuencia
     indices[0][posicion] = valor
     mensaje("SI%d:%f" % (posicion, valor),2)
+    secuencia.append("SI%d:%f" % (posicion, valor))
 def set_numero(posicion, valor):
-    global numeros
+    global numeros, secuencia
     numeros[0][posicion] = valor
     mensaje("SN%d:%f" % (posicion, valor),2)
-
+    secuencia.append("SN%d:%f" % (posicion, valor))
 def read_solucion(posicion):
-    global solucion
+    global solucion, secuencia
     mensaje("RS%d:%f" % (posicion, solucion[0][posicion]),2)
+    secuencia.append("RS%d:%f" % (posicion, solucion[0][posicion]))
     return(solucion[0][posicion])
 def read_indice(posicion):
-    global indices
+    global indices, secuencia
     mensaje("RI%d:%f" % (posicion, indices[0][posicion]),2)
+    secuencia.append("RI%d:%f" % (posicion, indices[0][posicion]))
     return(indices[0][posicion])
 def read_numero(posicion):
-    global numeros
+    global numeros, secuencia
     mensaje("RN%d:%f" % (posicion, numeros[0][posicion]),2)
+    secuencia.append("RN%d:%f" % (posicion, numeros[0][posicion]))
     return(numeros[0][posicion])
 
 def suma_naturales_original(N):
@@ -87,6 +93,13 @@ def suma_naturales_check(N):
     return (True)
 
 #suma_naturales_original(N)
+for N=10
 suma_naturales_profile(N)
 if suma_naturales_check(N):
     print(solucion)
+#print(secuencia)
+print(len(secuencia))
+
+
+
+

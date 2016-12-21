@@ -1,9 +1,9 @@
 # coding=utf-8
 import numpy as np
+from funciones import *
 from time import time
 
 verbose = 0
-N = 4
 Nnum = 100
 
 solucion = np.zeros((1, Nnum + 1))
@@ -92,13 +92,16 @@ def suma_naturales_check(N):
         return (False)
     return (True)
 
+
 #suma_naturales_original(N)
-for N=10
-suma_naturales_profile(N)
-if suma_naturales_check(N):
-    print(solucion)
-#print(secuencia)
-print(len(secuencia))
+print("N;Real;N2;N3;N4")
+for N in range(2,3):
+    secuencia = []
+    suma_naturales_profile(N)
+    suma_naturales_check(N)
+    print("%d;%d;%d;%d;%d" %(N,len(secuencia),N*N,N*N*N,N*N*N*N))
+    print(secuencia)
+    get_subconjuntos([1,2,3,4,5])
 
 
 

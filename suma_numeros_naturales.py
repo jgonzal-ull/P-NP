@@ -102,6 +102,7 @@ def suma_naturales_check(N):
     return(solucion == solucion_original)
 
 
+
 print("N;Longitud Secuencia;Conjuntos Posibles;Conjuntos Diferentes;N2;N3;N4")
 for N in range(2,20):
     secuencia = []

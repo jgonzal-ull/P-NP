@@ -1,18 +1,7 @@
 # coding=utf-8
-import numpy as np
+from variables_globales import  *
 from funciones import *
 
-Nnum = 100
-
-solucion = np.zeros((1, Nnum))
-solucion_original = np.zeros((1, Nnum))
-solucion_original_profile = np.zeros((1, Nnum))
-numeros = np.zeros((1,Nnum))
-indices = np.zeros((1,Nnum))
-secuencia=[]
-
-for i in range(0,Nnum):
-    numeros[0][i] = i
 def set_solucion(posicion, valor):
     global solucion, secuencia
     solucion[0][int(posicion)] = valor
@@ -55,7 +44,6 @@ def suma_naturales_original(N):
             solucion_original[0][i - 1] += j
             j += 1
         i += 1
-
 def suma_naturales_profile(N):
     set_indice(0,1)  # i=1
     while(read_indice(0)<=N):  # while i<=N
@@ -66,6 +54,21 @@ def suma_naturales_profile(N):
             set_indice(1,read_indice(1)+read_numero(1)) #j += 1
         set_indice(0,read_indice(0)+read_numero(1)) # i += 1
 
+def suma_naturales_original_optimizado2(N):
+    global solucion_original
+
+    solucion_original[0][0] = 1
+    i=2
+    while( i <= N ):
+        solucion_original[0][i - 1] = solucion_original[0][i - 2] + i
+        i += 1
+def suma_naturales_profile_optimizado2(N):
+    set_solucion(0,read_numero(1))  # solucion_original[0][0] = 1
+
+    set_indice(0,2)  # i=2
+    while(read_indice(0)<=N):  # while i<=N
+        set_solucion(read_indice(0) - 1, read_solucion(read_indice(0)-2) + read_numero(read_indice(0)))  # solucion_original[0][i - 1] = 0
+        set_indice(0,read_indice(0)+read_numero(1)) # i += 1
 
 
 def suma_naturales_original_optimizado1(N):
@@ -80,8 +83,6 @@ def suma_naturales_original_optimizado1(N):
             j += 1
         solucion_original[0][i - 1] = suma
         i += 1
-
-
 def suma_naturales_profile_optimizado1(N):
     set_indice(0,1)  # i=1
     while(read_indice(0)<=N):  # while i<=N
@@ -101,23 +102,19 @@ def suma_naturales_check(N):
     return(solucion == solucion_original)
 
 
-print("N;Real;Diferentes;N2;N3;N4;Conjuntos;Diferentes")
+print("N;Longitud Secuencia;Conjuntos Posibles;Conjuntos Diferentes;N2;N3;N4")
 for N in range(2,20):
     secuencia = []
-    suma_naturales_original(N)
-    suma_naturales_profile(N)
+#    suma_naturales_original(N)
+#    suma_naturales_profile(N)
+#    suma_naturales_original_optimizado1(N)
+#    suma_naturales_profile_optimizado1(N)
+    suma_naturales_original_optimizado2(N)
+    suma_naturales_profile_optimizado2(N)
     if np.all(suma_naturales_check(N)[0]):
-        mensaje("%d;%d;%d;%d;%d;%d;%d" %(N,len(secuencia),get_subconjuntos_diferentes(secuencia), \
-                                         N*N,N*N*N,N*N*N*N,get_subconjuntos(secuencia), \
+        mensaje("%d;%d;%d;%d;%d;%d;%d" %(N,len(secuencia),get_subconjuntos(secuencia), \
+                                        get_subconjuntos_diferentes(secuencia), \
+                                         N*N,N*N*N,N*N*N*N, \
                                         ),0)
-
-    secuencia = []
-    suma_naturales_original_optimizado1(N)
-    suma_naturales_profile_optimizado1(N)
-    if np.all(suma_naturales_check(N)[0]):
-        mensaje("%d;%d;%d;%d;%d;%d;%d" %(N,len(secuencia),get_subconjuntos_diferentes(secuencia), \
-                                         N*N,N*N*N,N*N*N*N,get_subconjuntos(secuencia), \
-                                        ),0)
-
 
 
